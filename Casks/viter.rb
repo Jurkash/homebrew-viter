@@ -1,6 +1,6 @@
 cask "viter" do
   version "1.0.0"
-  sha256 "test_sha_dry_run"
+  sha256 "a810249f13a5474aca266cb4bd41bdbbbbddf7aa930989cba0c05276b2a67dff"
 
   url "https://github.com/yuriishunkin/viter/releases/download/v#{version}/Viter-v#{version}.zip"
   name "Viter"
