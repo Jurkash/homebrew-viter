@@ -1,8 +1,8 @@
 cask "viter" do
-  version "1.0.4"
-  sha256 "ac1585bf10b8ef074d1f304dacc912b55fbec42435c19a56631340b9738cf633"
+  version "1.0.6"
+  sha256 "9ecf178feec1efe2850ed8fc8507d414bcdf6690b7746a0b8e3dfdc9f412e05b"
 
-  url "https://github.com/Jurkash/homebrew-viter/releases/download/v#{version}/Viter-v#{version}.zip"
+  url "https://github.com/Jurkash/homebrew-viter/releases/download/v#{version}/Viter-v#{version}.dmg"
   name "Viter"
   desc "Fan control and thermal monitoring for macOS"
   homepage "https://github.com/Jurkash/homebrew-viter"
