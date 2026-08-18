@@ -1,22 +1,22 @@
-# homebrew-tap
+# homebrew-viter
 
-Homebrew Tap for [Viter](https://github.com/yuriishunkin/viter) — fan control and thermal monitoring for macOS.
+Public Homebrew tap and binary releases for Viter — fan control and thermal monitoring for macOS. The application source repository is private.
 
 ## Install
 
 ```bash
-brew tap yuriishunkin/tap
+brew tap Jurkash/viter
 brew install --cask viter
 ```
 
 Or in one command:
 
 ```bash
-brew install --cask yuriishunkin/tap/viter
+brew install --cask Jurkash/viter/viter
 ```
 
 ## How it works
 
-The `Casks/viter.rb` file in this repository is **automatically updated** by the
-[viter release pipeline](https://github.com/yuriishunkin/viter/blob/main/.github/workflows/release.yml)
-whenever a new version is tagged. You should not need to edit it manually.
+The private Viter release pipeline publishes an app archive in this
+repository's Releases and automatically updates `Casks/viter.rb` whenever a new
+version is tagged. You should not need to edit it manually.
