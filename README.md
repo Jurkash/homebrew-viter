@@ -17,7 +17,7 @@ Viter Pro. This repository is the **public Homebrew tap** and the download host;
 the app's source repository is private.
 
 <p align="center">
-  <img src="https://viter.app/assets/og.png" alt="Viter on macOS: live thermal readout over a turning impeller" width="820">
+  <img src="https://viter.app/assets/shots/curve.webp" alt="Viter's fan sheet on the Sensor-based tab: a five-point fan curve over a thermal ramp, bound to CPU die average, with Silent, Balanced, Cool and Max preset chips below" width="760">
 </p>
 
 ## Install
@@ -157,13 +157,15 @@ working for 14 days between checks. Full text: [viter.app/privacy.html](https://
 
 ## Screenshots
 
-| The curve | Custom presets |
+| Custom presets | Every sensor |
 |---|---|
-| <img src="https://viter.app/assets/shots/curve.webp" alt="Multi-point fan curve editor with a live operating point" width="400"> | <img src="https://viter.app/assets/shots/preset.webp" alt="Custom preset with sensor rules and timed bursts" width="400"> |
+| <img src="https://viter.app/assets/shots/preset.webp" alt="Viter's preset editor for a preset named Dust purge: a drawn curve, a timed burst every 10 minutes, and a rule firing at 78 °C" width="400"> | <img src="https://viter.app/assets/shots/sensors.webp" alt="Viter's Sensors tab grouped as CPU, GPU, Memory, Storage and Power, each row with its SMC key, a sparkline and a live temperature" width="400"> |
 
-| Every sensor | The notch band |
-|---|---|
-| <img src="https://viter.app/assets/shots/sensors.webp" alt="Thermal sensors grouped by device with sparklines" width="400"> | <img src="https://viter.app/assets/shots/widget.webp" alt="Viter wrapped around the notch showing temperature and fan RPM" width="400"> |
+And the band that wraps the notch — icon, thermal rail, temperature, fan RPM:
+
+<p align="center">
+  <img src="https://viter.app/assets/shots/widget.webp" alt="Viter's notch widget: a black band wrapping the notch showing the impeller mark, a thermal rail, 68 °C and 2,180 RPM" width="620">
+</p>
 
 ## Questions people ask
 
