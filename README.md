@@ -16,12 +16,13 @@
 **Viter** is a Mac fan control app: draw a multi-point **fan curve** against any
 sensor, hold a **constant RPM**, or hand the fans back to macOS — over every
 thermal sensor an Apple silicon Mac exposes through the SMC. It lives in the
-menu bar with a live CPU temperature and fan RPM readout, and its panel drops
-out of the notch. *Вітер* is Ukrainian for "wind."
+menu bar with a live CPU temperature and fan RPM readout, its panel drops out of
+the notch, and a Shortcut or one line in Terminal can drive all of it.
+*Вітер* is Ukrainian for "wind."
 
-Monitoring is free forever, with no account and no telemetry. Fan control is
-Viter Pro. This repository is the **public Homebrew tap** and the download host;
-the app's source repository is private.
+Monitoring is free forever, with no account and no telemetry. Fan control and
+automation are Viter Pro. This repository is the **public Homebrew tap** and the
+download host; the app's source repository is private.
 
 ## Install
 
@@ -53,6 +54,20 @@ If you enabled fan control, remove the privileged helper **before** uninstalling
 — Settings › Fan control › Remove…, or `sudo /Applications/Viter.app/Contents/MacOS/Viter --remove-helper`.
 Removing it hands every fan back to macOS.
 
+### First launch — *new in 1.0.13*
+
+Viter opens a short welcome screen with your own sensors reading live, and says
+up front that fan control needs a one-time privileged helper. Install it there
+with a single administrator prompt, or choose **Not now** and keep monitoring
+with nothing to approve. The screen appears once and does not come back; fan
+control stays available in Settings whenever you want it.
+
+While fan control is off, a strip above the fan controls says which of four
+things is the matter — no helper installed, a helper that is not answering, one
+left behind by a different build of Viter, or a fan command the Mac refused — and
+its button does the thing that fixes that case. Settings marks the same state on
+the helper row (Set up, Not answering, Out of date) until it is resolved.
+
 ## Requirements
 
 | | |
@@ -60,7 +75,7 @@ Removing it hands every fan back to macOS.
 | Mac | Apple silicon (M1 or later). Intel Macs are not supported |
 | macOS | 14 Sonoma or later |
 | Disk | About 6 MB |
-| Fan control | One administrator authentication, once, to install a privileged helper |
+| Fan control | One administrator authentication, once, to install a privileged helper — offered on first launch, or in Settings whenever you like |
 | Monitoring | Nothing at all — no password, no network, no account |
 
 ## Which Macs
@@ -109,6 +124,56 @@ one you draw), and two kinds of behaviour on top:
 
 You also choose which four presets the menu bar panel offers, and in what order.
 
+## From a terminal, a script or a Shortcut (Pro) — *new in 1.0.13*
+
+Turn on **Settings › From other apps › Control from other apps**, and the
+commands the panel offers — Boost, a held speed, one of the four built-in
+presets, Auto — can be asked for from outside, along with a status read. Homebrew
+puts the `viter` command on your PATH with the app and keeps it up to date;
+installed from the disk image instead, Settings shows the one-line `ln -s` to
+copy. Viter has to be running for any of it: the app is what applies the command.
+
+```bash
+viter boost                          # every fan to maximum for 60 seconds
+viter boost --for 5m
+viter set --rpm 3800 --for 10m       # hold a speed on every fan
+viter set --rpm 4200 --fan 0 --hold  # one fan, until something takes it back
+viter preset Silent --for 1h         # Silent · Balanced · Cool · Max
+viter auto                           # hand every fan back to macOS, now
+viter status                         # one line; --json for a machine to read
+viter help
+```
+
+Durations are `5s`, `90s`, `10m`, `2h`, or a bare number of seconds, from one
+second to a day. **A command lasts 60 seconds unless you say otherwise, and the
+fans go back to whatever was applied before when it runs out** — a script that
+dies half way through cannot leave your Mac pinned at 6,000 RPM. `--hold` is how
+you ask for the opposite, and even then Auto or a click in the app takes it back.
+An out-of-range duration is refused rather than quietly clamped.
+
+Shortcuts, Automator and anything else that can open a URL use the same grammar:
+
+```
+viter://boost?for=5s
+viter://preset?id=Balanced&hold=1
+viter://set?rpm=3800&fan=0&for=10m
+viter://auto
+```
+
+`status` is the one verb the URL door does not carry — nothing on the other end
+of a URL is listening for an answer.
+
+For scripting, `viter` exits **0** on success, **1** on a usage mistake, **2**
+when Viter is not running (`open -a Viter`), **3** when the command was refused
+(no Pro, or the switch is off), **4** when fan control is unavailable on this
+Mac, and **5** when the SMC refused the write. Messages come back in your Mac's
+language, because the app composes them.
+
+Everything stays on the Mac: the command talks to Viter over a socket only
+processes running as you can reach, and Viter applies it exactly as it applies a
+click — so the panel tells the truth about what is running, and the safety
+cutoffs below cover a speed a script set just as they cover one you chose.
+
 ## Every sensor your Mac exposes
 
 Every thermal key the SMC reports — on some Macs more than a hundred — grouped
@@ -120,8 +185,8 @@ folds the rest away.
 
 Alongside them: a teardown-accurate **airflow X-ray** of your chassis tinted by
 live temperatures, **history charts** over seven ranges from one minute to a
-full day, headroom to throttle, package power, and lifetime totals for air moved
-and heat carried out.
+full day, headroom to throttle, SoC power, and lifetime totals for air moved and
+heat carried out.
 
 ## Safety, stated plainly
 
@@ -129,8 +194,8 @@ and heat carried out.
   refuses the write and Viter says so — it never pretends a write succeeded.
 - Above 98 °C with a custom configuration applied, Viter hands every fan back to
   macOS and shows a banner naming the temperature, the action, and the affected
-  configuration. That backstop cannot be switched off; there is a configurable
-  cutoff at 95 °C above it.
+  configuration. That backstop cannot be switched off, and a cutoff you can turn
+  off sits below it at 95 °C.
 - Every command is clamped to the range the fan itself reports.
 - Custom targets do not survive sleep or reboot on their own; while a curve is
   applied Viter re-issues the target at each 1 Hz poll.
@@ -145,9 +210,11 @@ and heat carried out.
 | Sensor curves and held speeds | | ✓ |
 | Silent, Balanced, Cool presets | | ✓ |
 | Custom presets, sensor rules, timed bursts | | ✓ |
+| Control from Shortcuts, scripts and the command line | | ✓ |
 
 Pro is a monthly or yearly subscription, or a one-time purchase that keeps
-working — see [pricing](https://viter.app/pricing.html). One licence, one Mac.
+working — see [pricing](https://viter.app/pricing.html). A licence covers one
+Mac; keys bought earlier with more seats keep them, and Settings shows the count.
 Paddle is the merchant of record.
 
 ## Privacy
@@ -175,8 +242,14 @@ control needs a Mac with fans; a MacBook Air gets the full sensor side.
 
 **Why does it ask for an administrator password?** Only root may write fan keys,
 so Viter installs a small privileged helper — one authentication, Touch ID where
-your Mac has it. Its entire vocabulary is four verbs: set a fan's speed, hand a
-fan back to macOS, and two health checks.
+your Mac has it. Its whole vocabulary is setting a fan's speed, handing a fan
+back to macOS, and answering which build it is and whether it is alive: no shell,
+no paths, no arbitrary SMC keys.
+
+**Can other apps drive Viter?** Yes, with Pro: turn on Control from other apps in
+Settings, then use a `viter://` URL in a Shortcut or the `viter` command in
+Terminal — boost, hold an RPM, apply a preset, return to Auto, or read status. It
+stays local to your Mac, and a timed command hands the fans back when it expires.
 
 **Is taking over the fans safe?** Speeds are clamped to each fan's own reported
 range, and the 98 °C hand-back is a backstop no setting disables.
@@ -223,5 +296,6 @@ hand.
 `fan speed control mac` · `mac cpu temperature monitor` ·
 `macos thermal monitoring` · `menu bar temperature app mac` ·
 `mac temperature menu bar` · `macbook cooling app` · `quiet macbook fans` ·
-`macos notch app` · `homebrew cask fan control` ·
+`mac fan control cli` · `fan control from terminal macos` ·
+`macos shortcuts fan control` · `macos notch app` · `homebrew cask fan control` ·
 `macs fan control alternative` · `tg pro alternative` · `smcfancontrol alternative`
