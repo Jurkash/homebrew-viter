@@ -5,7 +5,7 @@ cask "viter" do
   url "https://github.com/Jurkash/homebrew-viter/releases/download/v#{version}/Viter-v#{version}.dmg"
   name "Viter"
   desc "Fan control and thermal monitoring for macOS"
-  homepage "https://github.com/Jurkash/homebrew-viter"
+  homepage "https://viter.app/"
 
   depends_on arch: :arm64
   depends_on macos: :sonoma
