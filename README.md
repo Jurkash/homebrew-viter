@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="https://viter.app/assets/icon-256.png" alt="Viter app icon: two gradient impeller blades in S-symmetry around a wheat hub, on a deep navy field" width="128" height="128">
+</p>
+
 # Viter — Mac fan control and thermal monitoring for Apple silicon
 
 [![Latest version](https://img.shields.io/github/v/release/Jurkash/homebrew-viter?label=version&color=2E9BD6)](https://github.com/Jurkash/homebrew-viter/releases/latest)
@@ -15,10 +19,6 @@ out of the notch. *Вітер* is Ukrainian for "wind."
 Monitoring is free forever, with no account and no telemetry. Fan control is
 Viter Pro. This repository is the **public Homebrew tap** and the download host;
 the app's source repository is private.
-
-<p align="center">
-  <img src="https://viter.app/assets/shots/curve.webp" alt="Viter's fan sheet on the Sensor-based tab: a five-point fan curve over a thermal ramp, bound to CPU die average, with Silent, Balanced, Cool and Max preset chips below" width="760">
-</p>
 
 ## Install
 
@@ -157,15 +157,13 @@ working for 14 days between checks. Full text: [viter.app/privacy.html](https://
 
 ## Screenshots
 
-| Custom presets | Every sensor |
+| The curve | Custom presets |
 |---|---|
-| <img src="https://viter.app/assets/shots/preset.webp" alt="Viter's preset editor for a preset named Dust purge: a drawn curve, a timed burst every 10 minutes, and a rule firing at 78 °C" width="400"> | <img src="https://viter.app/assets/shots/sensors.webp" alt="Viter's Sensors tab grouped as CPU, GPU, Memory, Storage and Power, each row with its SMC key, a sparkline and a live temperature" width="400"> |
+| <img src="https://viter.app/assets/shots/curve.webp" alt="Viter's fan sheet on the Sensor-based tab: a five-point fan curve over a thermal ramp, bound to CPU die average, with Silent, Balanced, Cool and Max preset chips below" width="400"> | <img src="https://viter.app/assets/shots/preset.webp" alt="Viter's preset editor for a preset named Dust purge: a drawn curve, a timed burst every 10 minutes, and a rule firing at 78 °C" width="400"> |
 
-And the band that wraps the notch — icon, thermal rail, temperature, fan RPM:
-
-<p align="center">
-  <img src="https://viter.app/assets/shots/widget.webp" alt="Viter's notch widget: a black band wrapping the notch showing the impeller mark, a thermal rail, 68 °C and 2,180 RPM" width="620">
-</p>
+| Every sensor | The notch band |
+|---|---|
+| <img src="https://viter.app/assets/shots/sensors.webp" alt="Viter's Sensors tab grouped as CPU, GPU, Memory, Storage and Power, each row with its SMC key, a sparkline and a live temperature" width="400"> | <img src="https://viter.app/assets/shots/widget.webp" alt="Viter's notch widget: a black band wrapping the notch showing the impeller mark, a thermal rail, 68 °C and 2,180 RPM" width="400"> |
 
 ## Questions people ask
 
