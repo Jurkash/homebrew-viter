@@ -1,5 +1,8 @@
 <p align="center">
-  <img src="https://viter.app/assets/icon-256.png" alt="Viter app icon: two gradient impeller blades in S-symmetry around a wheat hub, on a deep navy field" width="128" height="128">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/lockup-dark.png">
+    <img src="assets/lockup-light.png" alt="Viter — the app icon beside the wordmark, whose i is dotted by the wheat operating point" width="227">
+  </picture>
 </p>
 
 # Viter — Mac fan control and thermal monitoring for Apple silicon
