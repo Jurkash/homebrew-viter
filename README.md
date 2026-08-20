@@ -37,6 +37,10 @@ brew tap Jurkash/viter
 brew install --cask viter
 ```
 
+Open it once from Finder, the Dock or Spotlight after installing: Homebrew marks
+what it installs as downloaded, and that first ordinary launch is what tells
+macOS you meant it.
+
 Prefer a disk image? [Download Viter from viter.app](https://viter.app/) or grab
 `Viter-vX.Y.Z.dmg` from [Releases](https://github.com/Jurkash/homebrew-viter/releases/latest).
 Every build is Developer ID signed, notarized and stapled by Apple, so it opens
@@ -131,7 +135,15 @@ commands the panel offers — Boost, a held speed, one of the four built-in
 presets, Auto — can be asked for from outside, along with a status read. Homebrew
 puts the `viter` command on your PATH with the app and keeps it up to date;
 installed from the disk image instead, Settings shows the one-line `ln -s` to
-copy. Viter has to be running for any of it: the app is what applies the command.
+copy.
+
+**Open Viter once before the first command.** Viter has to be running for a
+command to land — it is the app that applies it — and there is a second reason on
+a Homebrew install: `brew` marks what it installs as downloaded, exactly as
+Safari would, and macOS clears that the first time the app is opened normally.
+Until then `viter` waits on a Gatekeeper check with nothing on screen to answer
+it, which looks like a command that has hung. One launch from Finder, the Dock or
+`open -a Viter` settles it for good.
 
 ```bash
 viter boost                          # every fan to maximum for 60 seconds
