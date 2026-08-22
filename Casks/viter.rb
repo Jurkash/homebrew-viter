@@ -1,6 +1,6 @@
 cask "viter" do
-  version "1.0.13"
-  sha256 "2044b41aa3a464ed18e49f28b88da144f421ffc06de70edd29f3ee2914e317eb"
+  version "1.1.2"
+  sha256 "78826c896f3fd94d986363d73e69715a6755b11a1a167615678182f7b31bdd47"
 
   url "https://github.com/Jurkash/homebrew-viter/releases/download/v#{version}/Viter-v#{version}.dmg"
   name "Viter"
